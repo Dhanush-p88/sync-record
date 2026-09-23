@@ -1,0 +1,45 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs
+logs/
+*.log
+
+# Sensitive credentials & secrets
+credentials.json
+token.json
+*client_secret*.json
+
+# Local recordings & staging test files
+uploads/
+exports/
+temp/
+scratch/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.part
+*.crdownload
+
+# IDE / System
+.vscode/
+.idea/
+*.swp
+check_drive_account.py

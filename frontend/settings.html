@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Settings - Automated Session Recording Upload System</title>
+  <meta name="description" content="Configure system directories, operation modes, stabilization timers, and file rules.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 7l-7 5 7 5V7z"></path>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">SyncRecord</span>
+          <span class="brand-sub">Auto Upload</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="/" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="9"></rect>
+            <rect x="14" y="3" width="7" height="5"></rect>
+            <rect x="14" y="12" width="7" height="9"></rect>
+            <rect x="3" y="16" width="7" height="5"></rect>
+          </svg>
+          Dashboard
+        </a>
+        <a href="/batches" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          Batches
+        </a>
+        <a href="/settings" class="nav-item active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          Settings
+        </a>
+        <a href="/history" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Upload History
+        </a>
+        <a href="/logs" class="nav-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" y1="19" x2="20" y2="19"></line>
+          </svg>
+          Logs
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status-indicator">
+          <span class="status-dot online"></span>
+          <span class="system-status-label">MySQL Settings Sync</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+      <header class="top-nav-bar">
+        <div class="top-nav-left">
+          <button id="btn-toggle-sidebar" class="sidebar-toggle-btn" aria-label="Toggle Sidebar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <span class="page-breadcrumb">Application Configuration</span>
+        </div>
+        <div class="top-nav-right">
+          <button type="button" id="btn-reset-settings" class="btn btn-secondary">
+            Reset to Defaults
+          </button>
+          <button type="submit" form="settings-form" id="btn-save-settings" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            Save All Settings
+          </button>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <form id="settings-form">
+          <!-- 1. General Settings Card -->
+          <section class="card settings-section-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon icon-backend">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="card-title">General Engine Configuration</h2>
+                  <p class="card-desc">Core directory paths, transfer modes, and stabilization wait parameters</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-grid">
+              <!-- Watch Folder -->
+              <div class="form-group">
+                <label for="watch-folder-input" class="form-label">Watch Folder Directory</label>
+                <input type="text" id="watch-folder-input" name="watch_folder" class="form-input" required>
+                <span class="form-hint">Directory continuously monitored by Watchdog for incoming recordings.</span>
+              </div>
+
+              <!-- Upload Root -->
+              <div class="form-group">
+                <label for="upload-root-input" class="form-label">Upload Destination Root</label>
+                <input type="text" id="upload-root-input" name="upload_root" class="form-input" required>
+                <span class="form-hint">Parent directory where batch subfolders (e.g. <code>exports/[Batch]/</code>) are stored.</span>
+              </div>
+
+              <!-- Stabilization Time -->
+              <div class="form-group">
+                <label for="stabilization-time-input" class="form-label">Stabilization Wait Duration (seconds)</label>
+                <input type="number" id="stabilization-time-input" name="stabilization_time" class="form-input" min="1" max="300" required>
+                <span class="form-hint">Period during which file size must remain completely unchanged before processing.</span>
+              </div>
+
+              <!-- Operation Mode -->
+              <div class="form-group">
+                <label class="form-label">Operation Mode</label>
+                <div class="radio-card-group">
+                  <label class="radio-card" id="mode-copy-card">
+                    <input type="radio" name="operation_mode" value="COPY" checked>
+                    <div>
+                      <strong style="color: #38bdf8;">COPY Mode</strong>
+                      <div class="text-muted text-sm">Keep original in Watch Folder</div>
+                    </div>
+                  </label>
+                  <label class="radio-card" id="mode-move-card">
+                    <input type="radio" name="operation_mode" value="MOVE">
+                    <div>
+                      <strong style="color: #c084fc;">MOVE Mode</strong>
+                      <div class="text-muted text-sm">Move file into batch destination</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. Google Drive & Cloud Target Destination Card -->
+          <section class="card settings-section-card" style="border: 1px solid rgba(56, 189, 248, 0.3); box-shadow: 0 4px 20px -5px rgba(14, 165, 233, 0.15);">
+            <div class="card-header" style="background: rgba(14, 165, 233, 0.08);">
+              <div class="card-title-group">
+                <div class="card-icon" style="background: rgba(14, 165, 233, 0.2); color: #38bdf8;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                    <polyline points="12 13 12 8 16 8"></polyline>
+                    <path d="M12 17h.01"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="card-title" style="color: #f8fafc;">Google Drive Cloud Target Destination</h2>
+                  <p class="card-desc">Configure which Google Drive folder all recordings and pasted links automatically upload to</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-grid">
+              <div class="form-group">
+                <label for="gdrive-folder-name-input" class="form-label">Google Drive Folder Name</label>
+                <input type="text" id="gdrive-folder-name-input" name="gdrive_folder_name" class="form-input" placeholder="meetings" required>
+                <span class="form-hint">Display name of the target folder (e.g. <code>meetings</code>, <code>training</code>, <code>client_calls</code>).</span>
+              </div>
+
+              <div class="form-group">
+                <label for="gdrive-destination-folder-input" class="form-label">Local Google Drive Path (Desktop Sync)</label>
+                <input type="text" id="gdrive-destination-folder-input" name="gdrive_destination_folder" class="form-input" placeholder="G:\My Drive\meetings" required>
+                <span class="form-hint">Target directory in Google Drive (e.g. <code>G:\My Drive\meetings</code> or <code>G:\My Drive\AnyFolder</code>). Google Drive for Desktop automatically syncs this to the cloud!</span>
+              </div>
+
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label for="gdrive-destination-url-input" class="form-label">Google Drive Web Link / Folder URL</label>
+                <input type="text" id="gdrive-destination-url-input" name="gdrive_destination_url" class="form-input" placeholder="https://drive.google.com/drive/folders/1IfrJujHUpRZ-258dZVBBHvwTscdWwK4a?usp=drive_link">
+                <span class="form-hint">The web link to your Google Drive folder. Paste any Google Drive folder link here to switch destination!</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. Application Behavior Card -->
+          <section class="card settings-section-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon icon-queue">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="card-title">Application Behavior</h2>
+                  <p class="card-desc">Startup options and background window behavior</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-grid">
+              <div class="toggle-switch-card">
+                <div class="toggle-info">
+                  <span class="form-label">Start Monitoring Automatically</span>
+                  <span class="form-hint">Automatically activate Watchdog upon server initialization.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="auto-start-input" name="auto_start_monitoring">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="toggle-switch-card">
+                <div class="toggle-info">
+                  <span class="form-label">Minimize to System Tray</span>
+                  <span class="form-hint">Minimize application to desktop tray when closing window (if supported).</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="minimize-tray-input" name="minimize_to_tray">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. File Processing Rules Card -->
+          <section class="card settings-section-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon icon-table">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="card-title">File Detection &amp; Filtering</h2>
+                  <p class="card-desc">Supported video formats and ignored temporary file patterns</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-grid">
+              <div class="form-group">
+                <label for="supported-exts-input" class="form-label">Supported Video Extensions</label>
+                <input type="text" id="supported-exts-input" name="supported_extensions" class="form-input" required>
+                <span class="form-hint">Comma-separated list of recognized recording formats (e.g. <code>.mp4, .avi, .mov, .webm</code>).</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ignored-patterns-input" class="form-label">Ignored File Patterns</label>
+                <input type="text" id="ignored-patterns-input" name="ignored_patterns" class="form-input" required>
+                <span class="form-hint">Comma-separated patterns to discard (e.g. <code>*.tmp, *.part, *.crdownload, .*</code>).</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. Logging & Diagnostics Card -->
+          <section class="card settings-section-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon icon-db">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="4 17 10 11 4 5"></polyline>
+                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="card-title">Logging &amp; Diagnostics</h2>
+                  <p class="card-desc">Verbosity of application log files in <code>logs/</code></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-grid">
+              <div class="form-group">
+                <label for="log-level-select" class="form-label">Application Log Level</label>
+                <select id="log-level-select" name="log_level" class="form-input form-select">
+                  <option value="DEBUG">DEBUG — Verbose diagnostic traces</option>
+                  <option value="INFO">INFO — Standard operation events</option>
+                  <option value="WARNING">WARNING — Operational anomalies only</option>
+                  <option value="ERROR">ERROR — Fatal and blocking errors only</option>
+                </select>
+                <span class="form-hint">Applied to file watcher, stabilization, batch manager, and upload engine logs.</span>
+              </div>
+            </div>
+          </section>
+        </form>
+      </main>
+
+      <footer class="app-footer">
+        <div class="footer-content">
+          <p>Automated Session Recording Upload System &bull; Day 8 Settings Configuration</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
