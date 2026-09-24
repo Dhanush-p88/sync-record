@@ -503,7 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
           displayEl.innerHTML = `My Drive &gt; <strong style="color: #38bdf8;">${escapeHtml(data.folder_name)}</strong>`;
         }
         if (pathEl && data.destination_folder) {
-          pathEl.textContent = `(${data.destination_folder})`;
+          pathEl.textContent = `(${data.destination_folder.replace(/\\\\/g, '\\')})`;
         }
         if (openLinkEl && data.folder_url) {
           openLinkEl.href = data.folder_url;
