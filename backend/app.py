@@ -25,6 +25,12 @@ def create_app(config_class=Config):
     # Initialize database
     db.init_app(app)
 
+    with app.app_context():
+        try:
+            db.create_all()
+        except Exception as e:
+            app.logger.warning(f"Database auto-migration skipped or failed: {e}")
+
     # Root route - serves the frontend index.html
     @app.route("/")
     def index():

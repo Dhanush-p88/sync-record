@@ -20,9 +20,17 @@ class Config:
     _encoded_password = urllib.parse.quote_plus(DB_PASSWORD) if DB_PASSWORD else ""
     _auth_segment = f"{DB_USER}:{_encoded_password}" if _encoded_password else DB_USER
 
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql+pymysql://{_auth_segment}@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4"
-    )
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    if DATABASE_URL:
+        if DATABASE_URL.startswith("postgres://"):
+            DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+        SQLALCHEMY_DATABASE_URI = DATABASE_URL
+    elif os.getenv("USE_SQLITE", "false").lower() == "true":
+        SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASE_DIR, 'session_recording.db')}"
+    else:
+        SQLALCHEMY_DATABASE_URI = (
+            f"mysql+pymysql://{_auth_segment}@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4"
+        )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {
         "pool_recycle": 280,
