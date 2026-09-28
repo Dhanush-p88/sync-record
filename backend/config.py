@@ -21,11 +21,14 @@ class Config:
     _auth_segment = f"{DB_USER}:{_encoded_password}" if _encoded_password else DB_USER
 
     DATABASE_URL = os.getenv("DATABASE_URL")
+    is_render = os.getenv("RENDER", "false").lower() == "true"
+    use_sqlite = os.getenv("USE_SQLITE", "false").lower() == "true"
+
     if DATABASE_URL:
         if DATABASE_URL.startswith("postgres://"):
             DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
         SQLALCHEMY_DATABASE_URI = DATABASE_URL
-    elif os.getenv("USE_SQLITE", "false").lower() == "true":
+    elif is_render or use_sqlite or not os.getenv("DB_HOST"):
         SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASE_DIR, 'session_recording.db')}"
     else:
         SQLALCHEMY_DATABASE_URI = (
